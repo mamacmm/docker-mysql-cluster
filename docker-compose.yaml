@@ -9,8 +9,8 @@ services:
       image: mysql:5.7.21
       volumes:
          - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime 
-         - /home/docker/data/mysql/db:/var/lib/mysql
-         - /home/docker/data/mysql/backup:/backup
+         - /home/docker/data/mysql1/db:/var/lib/mysql
+         - /home/docker/data/mysql1/backup:/backup
       expose:
           - "3306"
       environment:
@@ -23,8 +23,8 @@ services:
       image: mysql:5.7.21
       volumes:
          - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime 
-         - /home/docker/data/mysql/db:/var/lib/mysql
-         - /home/docker/data/mysql/backup:/backup
+         - /home/docker/data/mysql2/db:/var/lib/mysql
+         - /home/docker/data/mysql2/backup:/backup
       expose:
           - "3306"
       environment:
