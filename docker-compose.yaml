@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 networks:
   default:
     external:
@@ -6,31 +6,34 @@ networks:
 services:
     mysql1:
       container_name: "mysql1"
-      image: mysql:latest
+      image: mysql:5.7.21
       volumes:
-          - ./${MYSQL1_SAVE_PATH}:/var/lib/mysql
+         - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime 
+         - /home/docker/data/mysql/db:/var/lib/mysql
+         - /home/docker/data/mysql/backup:/backup
       expose:
           - "3306"
       environment:
-          - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
-          - MYSQL_DATABASE=${DATABASE}
+          - MYSQL_ROOT_PASSWORD=123456
       restart: always
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --lower_case_table_names=1 --max_connections=20000
     
     mysql2:
       container_name: "mysql2"
-      image: mysql:latest
+      image: mysql:5.7.21
       volumes:
-          - ./${MYSQL2_SAVE_PATH}:/var/lib/mysql
+         - /usr/share/zoneinfo/Asia/Shanghai:/etc/localtime 
+         - /home/docker/data/mysql/db:/var/lib/mysql
+         - /home/docker/data/mysql/backup:/backup
       expose:
           - "3306"
       environment:
-          - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
-          - MYSQL_DATABASE=${DATABASE}
+          - MYSQL_ROOT_PASSWORD=123456
       restart: always
+      command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --lower_case_table_names=1 --max_connections=20000
     
     kingshard:
       container_name: "kingshard"
-      image: mysql:latest
       image: matjazmav/kingshard
       volumes:
           - ./ks1.yaml:/etc/ks.yaml
