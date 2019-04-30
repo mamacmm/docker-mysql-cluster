@@ -1,3 +1,5 @@
+#!/bin/sh
+
 tmpnetworkname="testwifi"
 tmpcontainername="mysql1"
 docker-compose up -d  $tmpcontainername
